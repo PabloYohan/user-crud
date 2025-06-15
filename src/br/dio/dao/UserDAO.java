@@ -34,4 +34,8 @@ public class UserDAO {
         return usersList.stream().filter(u -> u.getId() == id).findFirst()
                 .orElseThrow(() -> new UserNotFoundException(message));
     }
+
+    public List<UserModel> findAll() {
+        return usersList;
+    }
 }
