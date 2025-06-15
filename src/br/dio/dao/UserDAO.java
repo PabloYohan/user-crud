@@ -17,6 +17,18 @@ public class UserDAO {
         return user;
     }
 
+    public UserModel update(UserModel user) {
+        var foundUser = findModelById(user.getId());
+        usersList.remove(foundUser);
+        usersList.add(user);
+        return user;
+    }
+
+    public void delete(long id) {
+        var foundUser = findModelById(id);
+        usersList.remove(foundUser);
+    }
+
     public UserModel findModelById(long id) {
         String message = String.format("Não existe usuário com id %s", id);
         return usersList.stream().filter(u -> u.getId() == id).findFirst()
