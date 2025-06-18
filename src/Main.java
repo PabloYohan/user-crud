@@ -60,7 +60,10 @@ public class Main {
                 case FIND_ALL -> {
                     try {
                         List<UserModel> users = dao.findAll();
-                        System.out.println(users);
+                        users.forEach(u -> System.out
+                                .printf("Usuário: %s, email: %s, Nacimento: %s \n",
+                                        u.getName(),
+                                        u.getEmail(), u.getBirthday()));
                     } catch (EmptyStorageException ex) {
                         System.out.println(ex.getMessage());
                     }
