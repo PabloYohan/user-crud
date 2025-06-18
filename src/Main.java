@@ -1,10 +1,12 @@
 package src;
 
+import src.br.dio.Exceptions.EmptyStorageException;
+import src.br.dio.Exceptions.UserNotFoundException;
 import src.br.dio.dao.UserDAO;
 import src.br.dio.model.MenuOption;
 import src.br.dio.model.UserModel;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
@@ -30,24 +32,39 @@ public class Main {
                 case SAVE -> {
                     UserModel user = UserToSave();
                     dao.save(user);
-                    break;
                 }
                 case UPDATE -> {
-                    UserModel user = UserToUpdate();
-                    dao.update(user);
-                    break;
+                    try {
+                        UserModel user = UserToUpdate();
+                        dao.update(user);
+                    } catch (UserNotFoundException exception) {
+                        System.out.println(exception.getMessage());
+                    }
                 }
                 case DELETE -> {
-                    dao.delete(requestId());
+                    try {
+                        dao.delete(requestId());
+                    } catch (UserNotFoundException exception) {
+                        System.out.println(exception.getMessage());
+                    }
                 }
                 case FIND_BY_ID -> {
-                    UserModel user = dao.findModelById(requestId());
-                    System.out.printf("Usuário: %s, email: %s, Nacimento: %s \n", user.getName(),
-                            user.getEmail(), user.getBirthday());
+                    try {
+                        UserModel user = dao.findModelById(requestId());
+                        System.out.printf("Usuário: %s, email: %s, Nacimento: %s \n", user.getName(),
+                                user.getEmail(), user.getBirthday());
+                    } catch (UserNotFoundException exception) {
+                        System.out.println(exception.getMessage());
+                    }
                 }
                 case FIND_ALL -> {
-                    List<UserModel> users = dao.findAll();
-                    System.out.println(users);
+                    try {
+                        List<UserModel> users = dao.findAll();
+                        System.out.println(users);
+                    } catch (EmptyStorageException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
                 }
                 case EXIT -> {
                     System.exit(0);
@@ -69,7 +86,7 @@ public class Main {
         String birthdayString = scanner.next();
 
         DateTimeFormatter formated = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        OffsetDateTime birthday = OffsetDateTime.parse(birthdayString, formated);
+        LocalDate birthday = LocalDate.parse(birthdayString, formated);
 
         return new UserModel(0, name, email, birthday);
     }
@@ -85,7 +102,7 @@ public class Main {
         String birthdayString = scanner.next();
 
         DateTimeFormatter formated = DateTimeFormatter.ofPattern("dd/MM/yy");
-        OffsetDateTime birthday = OffsetDateTime.parse(birthdayString, formated);
+        LocalDate birthday = LocalDate.parse(birthdayString, formated);
 
         return new UserModel(id, name, email, birthday);
     }

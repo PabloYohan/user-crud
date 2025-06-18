@@ -1,5 +1,6 @@
 package src.br.dio.dao;
 
+import src.br.dio.Exceptions.EmptyStorageException;
 import src.br.dio.Exceptions.UserNotFoundException;
 import src.br.dio.model.UserModel;
 
@@ -36,6 +37,18 @@ public class UserDAO {
     }
 
     public List<UserModel> findAll() {
-        return usersList;
+        List<UserModel> result;
+        try {
+            verifyStorage();
+            result = usersList;
+        } catch (EmptyStorageException exception) {
+            exception.getStackTrace();
+            result = new ArrayList<>();
+        }
+        return result;
+    }
+
+    private void verifyStorage() {
+        if (usersList.isEmpty()) throw new EmptyStorageException("Não usuários cadastrados.");
     }
 }

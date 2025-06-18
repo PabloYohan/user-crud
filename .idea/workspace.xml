@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca0c98f-6959-4e3e-bd9c-18a7331a0cbe" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/dio/dao/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/dio/dao/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/br/dio/model/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/br/dio/model/UserModel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,6 +20,7 @@
       <list>
         <option value="Class" />
         <option value="Enum" />
+        <option value="Exception" />
       </list>
     </option>
   </component>
